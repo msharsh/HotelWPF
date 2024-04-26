@@ -1,0 +1,144 @@
+﻿<UserControl x:Class="HotelWPF.View.ReservationControl.ReservationEditTab"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:HotelWPF.View.ReservationControl"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.4*"/>
+            <ColumnDefinition Width="0.7*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock
+            Text="Room:"
+            Margin="10"
+            Grid.Column="0"
+            Grid.Row="0"/>
+        <TextBlock
+            Text="Check In Date:"
+            Margin="10"
+            Grid.Column="0"
+            Grid.Row="1"/>
+        <TextBlock
+            Text="Check Out Date:"
+            Margin="10"
+            Grid.Column="0"
+            Grid.Row="2"/>
+        <TextBlock
+            Text="Guest Name:"
+            Margin="10"
+            Grid.Column="0"
+            Grid.Row="3"/>
+        <TextBlock
+            Text="Phone Number:"
+            Margin="10"
+            Grid.Column="0"
+            Grid.Row="4"/>
+        <TextBlock
+            Text="Services:"
+            Margin="10"
+            Grid.Column="0"
+            Grid.Row="5"/>
+        <ComboBox
+            ItemsSource="{Binding AvailableRooms}"
+            SelectedItem="{Binding SelectedRoom}"
+            Margin="10"
+            Grid.Column="1"
+            Grid.Row="0"/>
+        <DatePicker
+            SelectedDate="{Binding CheckInDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            Margin="10"
+            Grid.Column="1"
+            Grid.Row="1"/>
+        <DatePicker
+            SelectedDate="{Binding CheckOutDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            Margin="10"
+            Grid.Column="1"
+            Grid.Row="2"/>
+        <TextBox
+            Text="{Binding GuestName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            Margin="10"
+            Grid.Column="1"
+            Grid.Row="3"/>
+        <TextBox
+            Text="{Binding PhoneNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            Margin="10"
+            Grid.Column="1"
+            Grid.Row="4"/>
+        <Grid Grid.Row="5" Grid.Column="1" Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <ItemsControl Grid.Row="1" ItemsSource="{Binding ServiceList}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="0 5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="{Binding}" VerticalAlignment="Center"/>
+                            <Button
+                                Command="{Binding DataContext.DeleteServiceCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                CommandParameter="{Binding}"
+                                Grid.Column="1"
+                                Content="X"
+                                Width="50"
+                                Style="{StaticResource DeleteButton}"
+                                VerticalAlignment="Center"/>
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="auto" />
+                </Grid.ColumnDefinitions>
+                <Button Content="+" Style="{StaticResource SecondaryButton}" Command="{Binding AddServiceCommand}" Grid.Column="1" Padding="10 4" Width="50"/>
+                <ComboBox
+                    Grid.Column="0"
+                    Margin="0 0 10 0"
+                    ItemsSource="{Binding AvailableServiceList}"
+                    SelectedItem="{Binding SelectedService}"/>
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="6" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Button
+                Content="Submit"
+                Style="{StaticResource PrimaryButton}"
+                Command="{Binding SubmitEditCommand}"
+                Width="100"
+                Height="40"
+                Grid.Column="0"/>
+            <Button
+                Content="Cancel"
+                Style="{StaticResource SecondaryButton}"
+                Command="{Binding EnableInfoCommand}"
+                Width="100"
+                Height="40"
+                Grid.Column="1"/>
+        </Grid>
+    </Grid>
+</UserControl>

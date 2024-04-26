@@ -1,0 +1,124 @@
+﻿<UserControl x:Class="HotelWPF.View.RoomControl.RoomInfoTab"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:HotelWPF.View.RoomControl"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" FontSize="24" Margin="0 0 0 5" Padding="0" Text="Info" HorizontalAlignment="Center"/>
+            <Grid Visibility="{Binding InfoTabVisibilty}" Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="4*"/>
+                    <ColumnDefinition Width="7*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock
+                    Text="Room Number:"
+                    Margin="10"
+                    Grid.Column="0"
+                    Grid.Row="0"/>
+                <TextBlock
+                    Text="{Binding SelectedRoom.RoomNumber}"
+                    Margin="10"
+                    Grid.Column="1"
+                    Grid.Row="0"/>
+                <TextBlock
+                    Text="Floor:"
+                    Margin="10"
+                    Grid.Column="0"
+                    Grid.Row="1"/>
+                <TextBlock
+                    Text="{Binding SelectedRoom.Floor}"
+                    Margin="10"
+                    Grid.Column="1"
+                    Grid.Row="1"/>
+                <TextBlock
+                    Text="Status:"
+                    Margin="10"
+                    Grid.Column="0"
+                    Grid.Row="2"/>
+                <TextBlock
+                    Text="{Binding SelectedRoom.Status}"
+                    Margin="10"
+                    Grid.Column="1"
+                    Grid.Row="2"/>
+                <TextBlock
+                    Text="Rate Per Night:"
+                    Margin="10"
+                    Grid.Column="0"
+                    Grid.Row="3"/>
+                <TextBlock
+                    Text="{Binding SelectedRoom.Rate}"
+                    Margin="10"
+                    Grid.Column="1"
+                    Grid.Row="3"/>
+                <TextBlock
+                    Text="Room Type:"
+                    Margin="10"
+                    Grid.Column="0"
+                    Grid.Row="4"/>
+                <TextBlock
+                    Text="{Binding SelectedRoom.RoomType.Name}"
+                    Margin="10"
+                    Grid.Column="1"
+                    Grid.Row="4"/>
+                <TextBlock
+                    Text="Room Inventory:"
+                    Margin="10"
+                    Grid.Column="0"
+                    Grid.Row="5"/>
+                <TextBlock
+                    Text="{Binding InventoryList}"
+                    Margin="10"
+                    TextWrapping="Wrap"
+                    Grid.Column="1"
+                    Grid.Row="5"/>
+                <Grid Grid.Row="6" Grid.ColumnSpan="2" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Button
+                        Content="Edit Room"
+                        Command="{Binding EnableEditCommand}"
+                        Style="{StaticResource PrimaryButton}"
+                        Width="100"
+                        Height="40"
+                        Grid.Column="0"/>
+                    <Button
+                        Content="Delete Room"
+                        Command="{Binding DeleteRoomCommand}"
+                        Style="{StaticResource DeleteButton}"
+                        Width="100"
+                        Height="40"
+                        Grid.Column="1"/>
+                </Grid>
+            </Grid>
+
+            <Grid Visibility="{Binding NullInfoTabVisibilty}" Grid.Row="1">
+                <TextBlock
+                    Text="No Room Have Been Chosen"
+                    TextAlignment="Center"
+                    FontSize="40"
+                    TextWrapping="Wrap"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>
